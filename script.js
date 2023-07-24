@@ -5,10 +5,32 @@
 
 window.addEventListener("load", function() {
     
+    
+
+    let list = document.getElementById("faultyItems");
+
+    list.style.visibility = "hidden";
+
+    const pilot = document.querySelector("input[name=pilotName]");
+    const copilot = document.querySelector("input[name=copilotName]");
+    const fuelLevel = document.querySelector("input[name=fuelLevel]");
+    const cargoLevel = document.querySelector("input[name=cargoMass]");
+
+
     let form = document.querySelector("form");
     form.addEventListener("submit", function(event){
-        event.preventDefault();
-        formSubmission();
+        if (pilot.value === "" || copilot.value === "" || fuelLevel.value === "" || cargoLevel.value === "") {
+            alert("All Fields Required");
+            event.preventDefault();
+        }
+        else if (formSubmission(window.document, list, pilot.value, copilot.value, fuelLevel.value, cargoLevel.value) === "invalid") {
+            window.alert("Ivalid Input")
+            event.preventDefault();
+        }
+         else {
+            formSubmission(window.document, list, pilot.value, copilot.value, fuelLevel.value, cargoLevel.value);
+            event.preventDefault();
+        }
     })
 
    let listedPlanets;
